@@ -33,6 +33,7 @@ html, body {
 }
 
 
+
 .coming-soon {
   font-size: clamp(10px, 1.2vw, 13px);
   letter-spacing: 8px;
@@ -295,6 +296,73 @@ html, body {
 @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
 @keyframes fadeUp { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
 ::-webkit-scrollbar { display: none; }
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 600px) {
+  html, body { overflow-y: auto; height: auto; cursor: auto; }
+
+  .cursor-dot, .cursor-ring { display: none; }
+
+  .logo-lockup {
+    position: relative;
+    top: auto; left: auto;
+    display: flex;
+    justify-content: center;
+    padding: 24px 20px 0;
+    animation: fadeUp .8s ease .2s forwards;
+  }
+  .logo-img { height: 90px; }
+
+  .scene {
+    height: auto;
+    min-height: 100svh;
+    padding: 20px 0 80px;
+    justify-content: flex-start;
+    padding-top: 32px;
+  }
+
+  .content { padding: 0 20px; }
+
+  .coming-soon { font-size: 10px; letter-spacing: 6px; margin-bottom: 16px; }
+
+  .eyebrow { font-size: 8px; letter-spacing: 4px; margin-bottom: 16px; }
+
+  .headline {
+    font-size: clamp(32px, 9vw, 52px);
+    letter-spacing: -1px;
+    line-height: 1.05;
+    margin-bottom: 12px;
+  }
+
+  .sub-line { font-size: 14px; margin-bottom: 16px; }
+
+  .descriptor { font-size: 13px; margin-bottom: 24px; }
+
+  .notify-wrap { max-width: 100%; margin-bottom: 28px; }
+  .notify-btn { cursor: auto; padding: 13px 16px; }
+
+  .pillars { gap: 16px; }
+  .pillar-sep { display: none; }
+  .pillar-label { font-size: 9px; max-width: 80px; }
+
+  .corner-tl, .corner-tr, .corner-bl, .corner-br { display: none; }
+
+  .bottom-bar {
+    padding: 10px 16px;
+    flex-direction: column;
+    gap: 4px;
+    text-align: center;
+  }
+  .bottom-entity { display: none; }
+}
+
+/* TABLET */
+@media (min-width: 601px) and (max-width: 900px) {
+  .logo-img { height: 110px; }
+  .headline { font-size: clamp(36px, 7vw, 60px); }
+  .notify-wrap { max-width: 360px; }
+  .pillar-label { font-size: 9px; }
+}
 </style>
 </head>
 <body>
@@ -376,7 +444,12 @@ html, body {
 </div>
 
 <script>
-/* CURSOR */
+/* CURSOR — desktop only */
+const isTouch = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+if (isTouch) {
+  document.body.style.cursor = 'auto';
+  document.querySelectorAll('.cursor-dot, .cursor-ring').forEach(el => el.style.display = 'none');
+}
 const dot = document.getElementById('cursor-dot');
 const ring = document.getElementById('cursor-ring');
 let mx = 0, my = 0, rx = window.innerWidth/2, ry = window.innerHeight/2;
